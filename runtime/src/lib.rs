@@ -54,7 +54,7 @@ use sp_version::RuntimeVersion;
 pub use frame_support::{
     construct_runtime, match_type, parameter_types,
     traits::{
-        Contains, Currency, Everything, FindAuthor, KeyOwnerProofSystem, Nothing, Randomness,
+        Contains, Currency, Everything, FindAuthor, KeyOwnerProofSystem, Nothing, Randomness, Get,
         StorageInfo,
     },
     weights::{
@@ -357,6 +357,26 @@ impl Contains<Call> for BaseFilter {
     }
 }
 
+pub struct LinearWeightToFee<C>(sp_std::marker::PhantomData<C>);
+
+impl<C> WeightToFeePolynomial for LinearWeightToFee<C>
+where
+    C: Get<Balance>,
+{
+    type Balance = Balance;
+
+    fn polynomial() -> WeightToFeeCoefficients<Self::Balance> {
+        let coefficient = WeightToFeeCoefficient {
+            coeff_integer: C::get(),
+            coeff_frac: Perbill::zero(),
+            negative: false,
+            degree: 1,
+        };
+
+        smallvec!(coefficient)
+    }
+}
+
 // Configure FRAME pallets to include in runtime.
 
 impl frame_system::Config for Runtime {
@@ -454,6 +474,8 @@ impl pallet_balances::Config for Runtime {
 }
 
 parameter_types! {
+    // Used with LinearWeightToFee conversion.
+    pub const FeeWeightRatio: u128 = 1_000;
     // Relay Chain `TransactionByteFee` / 10
     pub const TransactionByteFee: Balance = 10 * MICROUNIT;
     pub const OperationalFeeMultiplier: u8 = 5;
@@ -465,7 +487,8 @@ parameter_types! {
 impl pallet_transaction_payment::Config for Runtime {
     type OnChargeTransaction = pallet_transaction_payment::CurrencyAdapter<Balances, ()>;
     type TransactionByteFee = TransactionByteFee;
-    type WeightToFee = WeightToFee;
+    // Convert dispatch weight to a chargeable fee.
+    type WeightToFee = LinearWeightToFee<FeeWeightRatio>;
     // type FeeMultiplierUpdate = SlowAdjustingFeeUpdate<Self>;
     type FeeMultiplierUpdate =
         TargetedFeeAdjustment<Self, TargetBlockFullness, AdjustmentVariable, MinimumMultiplier>;
