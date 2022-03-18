@@ -1174,9 +1174,9 @@ dependencies = [
 
 [[package]]
 name = "ctor"
-version = "0.1.21"
+version = "0.1.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ccc0a48a9b826acdf4028595adc9db92caea352f7af011a3034acd172a52a0aa"
+checksum = "f877be4f7c9f246b183111634f75baa039715e3f46ce860677d3b19a69fb229c"
 dependencies = [
  "quote",
  "syn",
@@ -2955,6 +2955,19 @@ dependencies = [
 [[package]]
 name = "invarch-primitives"
 version = "0.1.0-dev"
+dependencies = [
+ "frame-system",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "invarch-primitives"
+version = "0.1.0-dev"
 source = "git+https://github.com/InvArch/InvArch-Frames?branch=development#b47a8d3de67de4853272006030a2d1dce4adffa1"
 dependencies = [
  "frame-system",
@@ -2998,9 +3011,9 @@ dependencies = [
  "pallet-contracts",
  "pallet-contracts-primitives",
  "pallet-contracts-rpc-runtime-api",
- "pallet-ipf",
- "pallet-ips",
- "pallet-ipt",
+ "pallet-ipf 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
+ "pallet-ips 0.1.0-dev",
+ "pallet-ipt 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "pallet-randomness-collective-flip",
  "pallet-session",
  "pallet-smartip",
@@ -5256,11 +5269,47 @@ dependencies = [
 [[package]]
 name = "pallet-ipf"
 version = "0.1.0-dev"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "invarch-primitives 0.1.0-dev",
+ "parity-scale-codec",
+ "scale-info",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "pallet-ipf"
+version = "0.1.0-dev"
 source = "git+https://github.com/InvArch/InvArch-Frames?branch=development#b47a8d3de67de4853272006030a2d1dce4adffa1"
 dependencies = [
  "frame-support",
  "frame-system",
- "invarch-primitives",
+ "invarch-primitives 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
+ "parity-scale-codec",
+ "scale-info",
+ "serde",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "pallet-ips"
+version = "0.1.0-dev"
+dependencies = [
+ "frame-benchmarking",
+ "frame-support",
+ "frame-system",
+ "invarch-primitives 0.1.0-dev",
+ "pallet-assets",
+ "pallet-balances",
+ "pallet-ipf 0.1.0-dev",
+ "pallet-ipt 0.1.0-dev",
  "parity-scale-codec",
  "scale-info",
  "serde",
@@ -5277,14 +5326,30 @@ source = "git+https://github.com/InvArch/InvArch-Frames?branch=development#b47a8
 dependencies = [
  "frame-support",
  "frame-system",
- "invarch-primitives",
+ "invarch-primitives 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "pallet-assets",
  "pallet-balances",
- "pallet-ipf",
- "pallet-ipt",
+ "pallet-ipf 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
+ "pallet-ipt 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "parity-scale-codec",
  "scale-info",
  "serde",
+ "sp-core",
+ "sp-io",
+ "sp-runtime",
+ "sp-std",
+]
+
+[[package]]
+name = "pallet-ipt"
+version = "0.1.0-dev"
+dependencies = [
+ "frame-support",
+ "frame-system",
+ "invarch-primitives 0.1.0-dev",
+ "pallet-balances",
+ "parity-scale-codec",
+ "scale-info",
  "sp-core",
  "sp-io",
  "sp-runtime",
@@ -5298,7 +5363,7 @@ source = "git+https://github.com/InvArch/InvArch-Frames?branch=development#b47a8
 dependencies = [
  "frame-support",
  "frame-system",
- "invarch-primitives",
+ "invarch-primitives 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "pallet-balances",
  "parity-scale-codec",
  "scale-info",
@@ -5524,12 +5589,12 @@ source = "git+https://github.com/InvArch/InvArch-Frames?branch=development#b47a8
 dependencies = [
  "frame-support",
  "frame-system",
- "invarch-primitives",
+ "invarch-primitives 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "pallet-balances",
  "pallet-contracts",
  "pallet-contracts-primitives",
- "pallet-ipf",
- "pallet-ips",
+ "pallet-ipf 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
+ "pallet-ips 0.1.0-dev (git+https://github.com/InvArch/InvArch-Frames?branch=development)",
  "parity-scale-codec",
  "scale-info",
  "serde",
